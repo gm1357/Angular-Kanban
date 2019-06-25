@@ -1,0 +1,7 @@
+<div class="card text-white bg-{{ bgColor }} mb-3 kcard" [ngStyle]="{'max-width.em': maxWidth}">
+    <div class="card-header text-center" *ngIf="header">{{ header }}</div>
+    <div class="card-body text-center">
+        <h5 class="card-title" *ngIf="title">{{ title }}</h5>
+        <p class="card-text"><ng-content></ng-content></p>
+    </div>
+</div>

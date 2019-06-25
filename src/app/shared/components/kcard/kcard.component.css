@@ -1,0 +1,10 @@
+.kcard {
+    position: relative;
+    left: 50px;
+    box-shadow: 3px 3px #222;
+    transition: 1s box-shadow;
+}
+
+.kcard:hover {
+    box-shadow: 7px 7px #222;
+}
