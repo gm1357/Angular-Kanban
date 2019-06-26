@@ -1,0 +1,10 @@
+<ul>
+    <li>
+        <app-board (click)="newBoard()" class="newBoard">New board <i class="fa fa-plus"> </i></app-board>
+    </li>
+    <li *ngFor="let board of boards">
+        <a [routerLink]="['board', board.id]">
+            <app-board [color]="board.color">{{ board.name }}</app-board>
+        </a>
+    </li>
+</ul>

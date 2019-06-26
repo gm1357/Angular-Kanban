@@ -1,0 +1,13 @@
+li {
+    display: inline;
+}
+
+ul {
+    list-style: none;
+    width: 90%;
+    margin: auto;
+}
+
+.newBoard {
+    cursor: pointer;
+}
