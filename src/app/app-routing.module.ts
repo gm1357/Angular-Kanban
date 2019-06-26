@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { BoardPageComponent } from './boards/board-page/board-page.component';
 
 const routes: Routes = [
   { 
@@ -8,6 +9,13 @@ const routes: Routes = [
     component: HomeComponent,
     data: {
         title: 'Angular Kanban! | Home'
+    }
+  },
+  { 
+    path: 'board/:id', 
+    component: BoardPageComponent,
+    data: {
+        title: 'Angular Kanban! | Board details'
     }
   }
 ];
