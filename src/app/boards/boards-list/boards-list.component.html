@@ -1,6 +1,6 @@
 <ul>
     <li>
-        <app-board (click)="newBoard()" class="newBoard">New board <i class="fa fa-plus"> </i></app-board>
+        <app-board (click)="showForm()" class="newBoard">New board <i class="fa fa-plus"> </i></app-board>
     </li>
     <li *ngFor="let board of boards">
         <a [routerLink]="['board', board.id]">
