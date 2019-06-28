@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board/board';
 import { boardService } from '../board/BoardService';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-boards-list',
@@ -10,8 +11,11 @@ import { boardService } from '../board/BoardService';
 export class BoardsListComponent implements OnInit {
 
   boards: Board[] = [];
+  isFormOn: boolean = false;
 
-  constructor(private boardService: boardService) {}
+  constructor(
+    private boardService: boardService
+  ) {}
 
   ngOnInit() {
     if (this.boardService.hasBoards())
@@ -19,11 +23,18 @@ export class BoardsListComponent implements OnInit {
   }
 
   showForm() {
-    this.newBoard(new Board({_id: '1', _name: 'teste', _color: 'primary'}))
+    this.isFormOn = true;
   }
 
-  newBoard(board: Board) {
-    this.boardService.setBoard(board);
-    this.boards.push(board);
+  updateBoards(board: Board) {
+    if (board.id) {
+      this.boards.unshift(board);
+      this.isFormOn = false;
+    }
+  }
+
+  closeForm(close: boolean) {
+    if (close === true)
+      this.isFormOn = false;
   }
 }

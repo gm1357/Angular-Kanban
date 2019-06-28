@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BoardModule } from './board/board.module';
 import { BoardsListModule } from './boards-list/boards-list.module';
 import { BoardPageModule } from './board-page/board-page.module';
+import { BoardFormComponent } from './boards-list/board-form/board-form.component';
 
 @NgModule({
     imports: [

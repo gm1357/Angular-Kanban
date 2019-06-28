@@ -1,0 +1,19 @@
+<app-board [color]="selectColor">
+    <form [formGroup]="newBoardForm" (submit)="saveForm()">
+        <input formControlName="name" type="text" id="name" class="form-control" placeholder="Name">
+        <select formControlName="color" (change)="selectColor = $event.target.value;" value="primary" name="color" class="form-control" id="color">
+            <option value="primary">Dark blue</option>
+            <option value="info">Light blue</option>
+            <option value="success">Green</option>
+            <option value="warning">Yellow</option>
+            <option value="danger">Red</option>
+            <option value="secondary">Grey</option>
+            <option value="dark">Black</option>
+        </select>
+
+        <div class="btn-group">
+            <button class="btn btn-danger" (click)="cancelForm();">Cancel</button>
+            <button class="btn btn-success" type="submit">Create</button>
+        </div>
+    </form>
+</app-board>

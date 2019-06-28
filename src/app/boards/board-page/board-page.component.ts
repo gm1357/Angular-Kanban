@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Board } from '../board/board';
 import { boardService } from '../board/BoardService';
 
@@ -14,6 +14,7 @@ export class BoardPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private boardService: boardService
   ) { }
 
@@ -22,6 +23,11 @@ export class BoardPageComponent implements OnInit {
       this.boardId = params.id;
       this.board = this.boardService.getBoard(this.boardId);
     });
+  }
+
+  remove() {
+    this.boardService.removeBoard(this.board.id);
+    this.router.navigate(['']);
   }
 
 }
