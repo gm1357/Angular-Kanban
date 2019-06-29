@@ -11,34 +11,47 @@ export class boardService {
     private currentId: number = 0;
 
     constructor() {
-        this.boardsList = JSON.parse(window.localStorage.getItem(BOARDS_KEY)) || [];
+        this.boardsList = this.getBoardList() || [];
         this.currentId = new Board(this.boardsList[0]).id || 0;
 
-        window.localStorage.setItem(CURRENT_ID_KEY, this.currentId.toString());
+        this.setCurrentId(this.currentId);
+    }
+    
+    private getBoardList() {
+        return JSON.parse(window.localStorage.getItem(BOARDS_KEY));
+    }
+
+    private setBoardList(boards: Board[]) {
+        window.localStorage.setItem(BOARDS_KEY, JSON.stringify(boards));
+    }
+    
+    getCurrentId() {
+        return parseInt(window.localStorage.getItem(CURRENT_ID_KEY));
+    }
+
+    private setCurrentId(id: number) {
+        window.localStorage.setItem(CURRENT_ID_KEY, id.toString());
     }
 
     hasBoards() {
-        return !!window.localStorage.getItem(BOARDS_KEY);
+        const boards = this.getBoardList();
+        return !!boards && boards.length;
     }
 
     setBoard(board: Board) {
         this.boardsList.unshift(board);
         this.currentId = board.id;
         
-        window.localStorage.setItem(CURRENT_ID_KEY, this.currentId.toString());
-        window.localStorage.setItem(BOARDS_KEY, JSON.stringify(this.boardsList));
+        this.setCurrentId(this.currentId);
+        this.setBoardList(this.boardsList);
     }
 
     getBoard(id: number): Board {
-        return new Board(JSON.parse(window.localStorage.getItem(BOARDS_KEY)).find(board => board._id == id));
-    }
-
-    getCurrentId() {
-        return parseInt(window.localStorage.getItem(CURRENT_ID_KEY));
+        return new Board(this.getBoardList().find(board => board._id == id));
     }
 
     getAllBoards(): Board[] {
-        const boards: Board[] = JSON.parse(window.localStorage.getItem(BOARDS_KEY)).map(obj => new Board(obj));
+        const boards: Board[] = this.getBoardList().map(obj => new Board(obj));
 
         if (boards.length >= 0) {
             this.currentId = boards[0].id;
@@ -46,7 +59,7 @@ export class boardService {
             this.currentId = 0;
         }
 
-        window.localStorage.setItem(CURRENT_ID_KEY, this.currentId.toString());
+        this.setCurrentId(this.currentId);
 
         return boards;
     }
@@ -59,6 +72,6 @@ export class boardService {
         
         this.boardsList.splice(index, 1);
         
-        window.localStorage.setItem(BOARDS_KEY, JSON.stringify(this.boardsList));
+        this.setBoardList(this.boardsList);
     }
 }
