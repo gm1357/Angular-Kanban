@@ -1,19 +1,9 @@
-ul {
-    list-style: none;
-    display: inline-block;
-    width: 100%;
-}
-
 .task-list {
     background-color: #F5F5F5;
     width: 26em;
     height: 100%;
     overflow: scroll;
     scrollbar-width: thin;
-}
-
-.newTask {
-    cursor: pointer;
 }
 
 .task-header {

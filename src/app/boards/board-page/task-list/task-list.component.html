@@ -1,1 +1,19 @@
-<p>task-list works!</p>
+<div class="task-list border rounded-lg">
+    <section class="task-header border-bottom">
+        <h2 class="text-center">{{ title }}</h2>
+    </section>
+    <section class="task-body">
+        <ul>
+            <li>
+                <app-task *ngIf="!isFormOn; else newTaskForm" class="newTask" (click)="showForm()" bgColor="primary">New task <i class="fa fa-plus"></i></app-task>
+
+                <ng-template #newTaskForm>
+                    <app-task-form (change)="updateTasks($event)" (cancel)="closeForm($event)"></app-task-form>
+                </ng-template>
+            </li>
+            <li *ngFor="let task of tasks">
+                <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
+            </li>
+        </ul>
+    </section>
+</div>

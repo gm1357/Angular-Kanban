@@ -1,2 +1,22 @@
-<p>board-page works! {{ boardId }} -> {{ board.name }}</p>
-<button class="btn btn-danger" (click)="remove()"><i class="fa fa-trash"></i></button>
+<div class="board">
+    <section class="board-info">
+        <h2 class="text-center m-3">{{ board.name }}</h2>
+        <button class="btn btn-danger m-3" (click)="remove()">Delete board <i class="fa fa-trash"></i></button>
+        <br>
+        <br>
+    </section>
+
+    <section class="flex">
+        <div class="item">
+            <i *ngIf="!isFormOn; else taskListForm" class="fa fa-plus" (click)="showForm()"></i>
+    
+            <ng-template #taskListForm>
+                <app-task-list-form [boardId]="boardId" (change)="updateTaskLists($event)" (cancel)="closeForm($event)"></app-task-list-form>
+            </ng-template>
+        </div>
+
+        <div class="item" *ngFor="let taskList of taskLists">
+            <app-task-list [title]="taskList.name"></app-task-list>
+        </div>
+    </section>
+<div>

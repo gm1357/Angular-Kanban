@@ -1,0 +1,29 @@
+.board {
+    height:87vh;
+}
+
+ul {
+    list-style: none;
+    display: inline-block;
+}
+
+li {
+    display: inline-block;
+}
+
+.board-info {
+    height: 20%;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 80%;
+}
+
+.item {
+    margin: 0 10px;
+    display: flex;
+}
