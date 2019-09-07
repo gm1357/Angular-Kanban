@@ -6,7 +6,7 @@ export class Board {
     
     constructor(obj) {
         obj && Object.assign(this, obj);
-      }
+    }
 
     get id() {
         return this._id;

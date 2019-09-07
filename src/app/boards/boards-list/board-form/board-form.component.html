@@ -1,7 +1,7 @@
 <app-board [color]="selectColor">
     <form [formGroup]="newBoardForm" (submit)="saveForm()">
-        <input formControlName="name" type="text" id="name" class="form-control" placeholder="Name">
-        <select formControlName="color" (change)="selectColor = $event.target.value;" value="primary" name="color" class="form-control" id="color">
+        <input formControlName="name" type="text" id="name" class="form-control my-2" placeholder="Name">
+        <select formControlName="color" (change)="selectColor = $event.target.value;" value="primary" name="color" class="form-control my-2" id="color">
             <option value="primary">Dark blue</option>
             <option value="info">Light blue</option>
             <option value="success">Green</option>

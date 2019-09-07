@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { boardService } from '../../board/BoardService';
+import { boardService } from '../../board/board.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Board } from '../../board/board';
 
