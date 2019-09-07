@@ -5,8 +5,7 @@ import { Board } from '../../board/board';
 
 @Component({
   selector: 'app-board-form',
-  templateUrl: './board-form.component.html',
-  styleUrls: ['./board-form.component.css']
+  templateUrl: './board-form.component.html'
 })
 export class BoardFormComponent implements OnInit {
 
