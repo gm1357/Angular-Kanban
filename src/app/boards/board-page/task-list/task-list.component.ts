@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from './task/task';
-import { TaskListService } from "./task-list.service";
-import { boardService } from '../../board/board.service';
+import { TaskService } from './task/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -12,49 +11,21 @@ export class TaskListComponent implements OnInit {
 
   tasks: Task[] = [];
   @Input() title = 'New task list';
+  @Input() taskListId: number;
+  @Input() boardId: number;
   isFormOn = false;
 
   constructor(
-    private taskListService: TaskListService,
-    private boardService: boardService
+    private taskService: TaskService
   ) { }
 
   ngOnInit() {
-    // let task: Task = {
-    //   id: 1,
-    //   color: 'primary',
-    //   details: 'teste teste teste',
-    //   title: 'TESTE 1'
-    // };
-
-    // this.tasks.push(task);
-
-    // task = {
-    //   id: 2,
-    //   color: 'warning',
-    //   details: 'teste teste teste',
-    //   title: 'TESTE 2'
-    // };
-
-    // this.tasks.push(task);
-
-    // task = {
-    //   id: 3,
-    //   color: 'danger',
-    //   details: 'teste teste teste',
-    //   title: 'TESTE 3'
-    // };
-
-    // this.tasks.push(task);
-    // this.tasks.push(task);
-    // this.tasks.push(task);
-    // this.tasks.push(task);
-    // this.tasks.push(task);
+    this.tasks = this.taskService.getTasks(this.boardId, this.taskListId) || [];
   }
 
   updateTasks(task: Task) {
-    if (task.id) {
-      this.tasks.push(task);
+    if (task instanceof Task) {
+      this.tasks.unshift(task);
       this.isFormOn = false;
     }
   }

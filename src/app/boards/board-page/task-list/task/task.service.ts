@@ -1,13 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
 
-const TASKS_KEY = 'taskList';
+const TASKS_KEY = 'tasks';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
 
-  setTask(task: Task) {
-    throw new Error("Method not implemented.");
+  getCurrentId(boardId: number, taskListId: number) {
+    const tasks = this.getTasks(boardId, taskListId);
+
+    return !!tasks ? tasks[0].id : 0;
+  }
+
+  getTasks(boardId: number, taskListId: number): Task[] {
+      let tasks = JSON.parse(
+        window.localStorage.getItem(`${TASKS_KEY}${boardId}_${taskListId}`)
+      );
+
+      if (!!tasks && tasks.length) {
+          tasks = tasks.map(obj => new Task(obj))
+      }
+      return tasks;
+  }
+
+  pushTask(boardId: number, taskListId: number, task: Task) {
+      const tasks = this.getTasks(boardId, taskListId) || [];
+      tasks.unshift(task);
+
+      window.localStorage.setItem(
+        `${TASKS_KEY}${boardId}_${taskListId}`, 
+        JSON.stringify(tasks)
+      );
   }
 
 }

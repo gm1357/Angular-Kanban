@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Task } from '../task/task';
 import { TaskService } from '../task/task.service';
@@ -11,6 +11,8 @@ export class TaskFormComponent implements OnInit {
 
   newTaskForm: FormGroup;
   selectColor = 'primary';
+  @Input() taskListId: number;
+  @Input() boardId: number;
   @Output() change: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter<boolean>();
   
@@ -32,12 +34,18 @@ export class TaskFormComponent implements OnInit {
     const details = this.newTaskForm.get('details').value;
     const color = this.newTaskForm.get('color').value;
 
-    this.newTask({id: 1, title, details, color});
+    this.newTask(new Task({
+      _id: (this.taskService.getCurrentId(this.boardId, this.taskListId) + 1), 
+      _title: title, 
+      _details: details, 
+      _color: color
+    }));
+
     this.newTaskForm.reset();
   }
 
   newTask(task: Task) {
-    this.taskService.setTask(task);
+    this.taskService.pushTask(this.boardId, this.taskListId, task);
     this.change.emit(task);
   }
 

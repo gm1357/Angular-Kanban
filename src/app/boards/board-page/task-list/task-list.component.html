@@ -8,7 +8,7 @@
                 <app-task *ngIf="!isFormOn; else newTaskForm" class="newTask" (click)="showForm()" bgColor="primary">New task <i class="fa fa-plus"></i></app-task>
 
                 <ng-template #newTaskForm>
-                    <app-task-form (change)="updateTasks($event)" (cancel)="closeForm($event)"></app-task-form>
+                    <app-task-form [taskListId]="taskListId" [boardId]="boardId" (change)="updateTasks($event)" (cancel)="closeForm($event)"></app-task-form>
                 </ng-template>
             </li>
             <li *ngFor="let task of tasks">

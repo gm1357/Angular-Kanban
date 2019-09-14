@@ -16,7 +16,7 @@
         </div>
 
         <div class="item" *ngFor="let taskList of taskLists">
-            <app-task-list [title]="taskList.name"></app-task-list>
+            <app-task-list [title]="taskList.name" [boardId]="boardId" [taskListId]="taskList.id"></app-task-list>
         </div>
     </section>
 <div>
