@@ -1,29 +1,23 @@
-.board {
-    height:87vh;
-}
-
-ul {
-    list-style: none;
-    display: inline-block;
-}
-
-li {
-    display: inline-block;
-}
-
 .board-info {
-    height: 20%;
+    display: flex;
+    margin-bottom: 50px;
 }
 
-.flex {
+.board-info-item {
+    flex: 1;
+}
+
+.task-list-grid {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     justify-content: flex-start;
-    height: 80%;
+    width: 100%;
+    padding-bottom: 20px;
+    overflow-x: auto;
 }
 
-.item {
-    margin: 0 10px;
+.task-list-item {
+    margin: 0 20px;
     display: flex;
 }

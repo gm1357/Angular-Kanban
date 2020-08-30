@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board/board';
 import { boardService } from '../board/board.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-boards-list',

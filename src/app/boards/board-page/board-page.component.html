@@ -1,13 +1,18 @@
 <div class="board">
     <section class="board-info">
+        <div class="board-info-item">
+            <button class="btn btn-danger m-3" (click)="remove()">
+                Delete board <i class="fa fa-trash"></i>
+            </button>
+        </div>
+
         <h2 class="text-center m-3">{{ board.name }}</h2>
-        <button class="btn btn-danger m-3" (click)="remove()">Delete board <i class="fa fa-trash"></i></button>
-        <br>
-        <br>
+
+        <div class="board-info-item"></div>
     </section>
 
-    <section class="flex">
-        <div class="item">
+    <section class="task-list-grid">
+        <div class="task-list-item">
             <i *ngIf="!isFormOn; else taskListForm" class="fa fa-plus" (click)="showForm()"></i>
     
             <ng-template #taskListForm>
@@ -15,7 +20,7 @@
             </ng-template>
         </div>
 
-        <div class="item" *ngFor="let taskList of taskLists">
+        <div class="task-list-item" *ngFor="let taskList of taskLists">
             <app-task-list [title]="taskList.name" [boardId]="boardId" [taskListId]="taskList.id"></app-task-list>
         </div>
     </section>

@@ -1,14 +1,17 @@
-<ul>
-    <li>
-        <app-board *ngIf="!isFormOn; else boardForm" (click)="showForm()" class="newBoard">New board <i class="fa fa-plus"> </i></app-board>
+<div class="boards-grid">
+    <div class="board-item">
+        <app-board *ngIf="!isFormOn; else boardForm" (click)="showForm()" class="new-board">
+            New board <i class="fa fa-plus"> </i>
+        </app-board>
 
         <ng-template #boardForm>
             <app-board-form (change)="updateBoards($event)" (cancel)="closeForm($event)"></app-board-form>
         </ng-template>
-    </li>
-    <li *ngFor="let board of boards">
+    </div>
+
+    <div class="board-item" *ngFor="let board of boards">
         <a [routerLink]="['board', board.id]">
             <app-board [color]="board.color">{{ board.name }}</app-board>
         </a>
-    </li>
-</ul>
+    </div>
+</div>

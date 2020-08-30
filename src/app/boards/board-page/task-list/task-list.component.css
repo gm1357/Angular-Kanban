@@ -8,7 +8,8 @@ ul {
     background-color: #F5F5F5;
     width: 26em;
     height: 100%;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
 }
 

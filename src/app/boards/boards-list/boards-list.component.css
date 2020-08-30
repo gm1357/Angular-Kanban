@@ -1,13 +1,18 @@
-li {
-    display: inline;
+.boards {
+    margin-top: 40px;
 }
 
-ul {
-    list-style: none;
-    width: 90%;
-    margin: auto;
+.boards-grid {
+    margin: 40px 30px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(21em, auto));
 }
 
-.newBoard {
+.board-item {
+    display: flex;
+    justify-content: center;
+}
+
+.new-board {
     cursor: pointer;
 }
