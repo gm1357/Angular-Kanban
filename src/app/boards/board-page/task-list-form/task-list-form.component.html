@@ -4,11 +4,13 @@
     </section>
     <section class="task-body">
         <form class="flex-form" [formGroup]="newTaskListForm" (submit)="saveForm()">
-                <input formControlName="name" type="text" id="name" class="form-control m-3" placeholder="Name">
+            <div class="m-3">
+                <input formControlName="name" type="text" id="name" class="form-control" placeholder="Name">
+            </div>
 
-            <div class="btn-group">
-                <button class="btn btn-danger" (click)="cancelForm();">Cancel</button>
+            <div class="btn-group m-3">
                 <button class="btn btn-success" type="submit">Create</button>
+                <button class="btn btn-danger" (click)="cancelForm();">Cancel</button>
             </div>
         </form>
     </section>

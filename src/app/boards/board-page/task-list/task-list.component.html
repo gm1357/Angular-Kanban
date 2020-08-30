@@ -3,17 +3,18 @@
         <h2 class="text-center">{{ title }}</h2>
     </section>
     <section class="task-body">
-        <ul>
-            <li>
-                <app-task *ngIf="!isFormOn; else newTaskForm" class="newTask" (click)="showForm()" bgColor="primary">New task <i class="fa fa-plus"></i></app-task>
+        <div class="task-item">
+            <app-task *ngIf="!isFormOn; else newTaskForm" class="new-task" (click)="showForm()" bgColor="primary">New task <i class="fa fa-plus"></i></app-task>
 
-                <ng-template #newTaskForm>
+            <ng-template #newTaskForm>
+                <div class="task-item">
                     <app-task-form [taskListId]="taskListId" [boardId]="boardId" (change)="updateTasks($event)" (cancel)="closeForm($event)"></app-task-form>
-                </ng-template>
-            </li>
-            <li *ngFor="let task of tasks">
-                <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
-            </li>
-        </ul>
+                </div>
+            </ng-template>
+        </div>
+
+        <div class="task-item" *ngFor="let task of tasks">
+            <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
+        </div>
     </section>
 </div>

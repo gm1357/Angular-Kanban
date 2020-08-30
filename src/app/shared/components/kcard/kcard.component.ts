@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-kcard',
@@ -11,5 +11,5 @@ export class KcardComponent {
   @Input() header: string = '';
   @Input() title: string = '';
   @Input() text: string = '';
-  @Input() maxWidth: string = '20';
+  @Input() maxWidth: string = '';
 }
