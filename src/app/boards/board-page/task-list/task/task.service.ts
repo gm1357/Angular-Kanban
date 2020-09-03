@@ -33,4 +33,11 @@ export class TaskService {
       );
   }
 
+  updateTaskList(boardId: number, taskListId: number, tasks: Task[]) {
+    window.localStorage.setItem(
+      `${TASKS_KEY}${boardId}_${taskListId}`, 
+      JSON.stringify(tasks)
+    );
+  }
+
 }

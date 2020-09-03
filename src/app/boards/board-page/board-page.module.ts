@@ -7,6 +7,7 @@ import { KcardModule } from 'src/app/shared/components/kcard/kcard.module';
 import { TaskFormComponent } from './task-list/task-form/task-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TaskListFormComponent } from './task-list-form/task-list-form.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { TaskListFormComponent } from './task-list-form/task-list-form.component
         CommonModule,
         KcardModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        DragDropModule
     ]
 })
 export class BoardPageModule { }

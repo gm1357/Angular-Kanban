@@ -13,8 +13,17 @@
             </ng-template>
         </div>
 
-        <div class="task-item" *ngFor="let task of tasks">
-            <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
+        <div
+            cdkDropList
+            [id]="taskListId"
+            [cdkDropListData]="tasks"
+            (cdkDropListDropped)="onTaskDrop($event)">
+            <div
+                class="task-item"
+                *ngFor="let task of tasks"
+                cdkDrag>
+                <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
+            </div>
         </div>
     </section>
 </div>
