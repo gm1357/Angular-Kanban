@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from './task/task';
 import { TaskService } from './task/task.service';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-list',
@@ -14,6 +14,7 @@ export class TaskListComponent implements OnInit {
   @Input() title = 'New task list';
   @Input() taskListId: number;
   @Input() boardId: number;
+  @Input() taskListsCdkIds: string[] = []
   isFormOn = false;
 
   constructor(
@@ -22,6 +23,8 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
     this.tasks = this.taskService.getTasks(this.boardId, this.taskListId) || [];
+    this.taskListsCdkIds = this.taskListsCdkIds.filter(id => id != `taskList_${this.taskListId}`);
+    console.log(this.taskListsCdkIds);
   }
 
   updateTasks(task: Task) {
@@ -42,30 +45,16 @@ export class TaskListComponent implements OnInit {
 
   onTaskDrop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
-      console.log(event);
-      if (event.currentIndex != event.previousIndex) {
-        this.interchangeTasks(
-          event.previousIndex,
-          event.currentIndex,
-          event.currentIndex > event.previousIndex
-        );
-        this.taskService.updateTaskList(this.boardId, this.taskListId, this.tasks);
-      }
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      this.taskService.updateTaskList(this.boardId, this.taskListId, event.container.data);
     } else {
-      console.log('mudou de lista');
-    }
-  }
-
-  private interchangeTasks(currentIndex: number, nextIndex: number, isDescend: boolean) {
-    let taskToMove = this.tasks[currentIndex];
-    let taskToBeReplaced = this.tasks[nextIndex];
-    const moveDirection = isDescend ? -1 : 1;
-    const checkCondition = isDescend ? () => nextIndex >= currentIndex : () => nextIndex <= currentIndex;
-
-    while (checkCondition()) {
-      this.tasks[nextIndex] = taskToMove;
-      taskToMove = taskToBeReplaced;
-      taskToBeReplaced = this.tasks[nextIndex = nextIndex + moveDirection];
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+      const transferTaskListId = parseInt(event.previousContainer.id.split('_')[1]);
+      this.taskService.updateTaskList(this.boardId, this.taskListId, event.container.data);
+      this.taskService.updateTaskList(this.boardId, transferTaskListId, event.previousContainer.data);
     }
   }
 }

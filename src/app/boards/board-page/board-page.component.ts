@@ -15,6 +15,7 @@ export class BoardPageComponent implements OnInit {
   boardId: number;
   board: Board;
   taskLists: TaskList[] = [];
+  taskListsCdkIds: string[] = [];
   isFormOn: boolean = false;
 
   constructor(
@@ -31,6 +32,7 @@ export class BoardPageComponent implements OnInit {
     });
 
     this.taskLists = this.taskListService.getTaskLists(this.boardId) || [];
+    this.taskListsCdkIds = this.taskLists.map(taskList => `taskList_${taskList.id}`) || [];
   }
 
   remove() {

@@ -15,7 +15,8 @@
 
         <div
             cdkDropList
-            [id]="taskListId"
+            [id]="'taskList_' + taskListId"
+            [cdkDropListConnectedTo]="taskListsCdkIds"
             [cdkDropListData]="tasks"
             (cdkDropListDropped)="onTaskDrop($event)">
             <div
