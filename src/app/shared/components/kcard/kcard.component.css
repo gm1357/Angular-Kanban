@@ -1,6 +1,7 @@
 .kcard {
     box-shadow: 3px 3px #222;
     transition: 1s box-shadow;
+    height: 100%;
 }
 
 .kcard:hover {
