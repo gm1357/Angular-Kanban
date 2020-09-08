@@ -3,27 +3,29 @@
         <h2 class="text-center">{{ title }}</h2>
     </section>
     <section class="task-body">
-        <div class="task-item">
-            <app-task *ngIf="!isFormOn; else newTaskForm" class="new-task" (click)="showForm()" bgColor="primary">New task <i class="fa fa-plus"></i></app-task>
+        <div class="tasks-list">
+            <div class="task-item">
+                <app-task *ngIf="!isFormOn; else newTaskForm" class="new-task" (click)="showForm()" bgColor="primary">New task <i class="fa fa-plus"></i></app-task>
 
-            <ng-template #newTaskForm>
-                <div class="task-item">
-                    <app-task-form [taskListId]="taskListId" [boardId]="boardId" (change)="updateTasks($event)" (cancel)="closeForm($event)"></app-task-form>
-                </div>
-            </ng-template>
-        </div>
+                <ng-template #newTaskForm>
+                    <div class="task-item">
+                        <app-task-form [taskListId]="taskListId" [boardId]="boardId" (change)="updateTasks($event)" (cancel)="closeForm($event)"></app-task-form>
+                    </div>
+                </ng-template>
+            </div>
 
-        <div
-            cdkDropList
-            [id]="'taskList_' + taskListId"
-            [cdkDropListConnectedTo]="taskListsCdkIds"
-            [cdkDropListData]="tasks"
-            (cdkDropListDropped)="onTaskDrop($event)">
             <div
-                class="task-item"
-                *ngFor="let task of tasks"
-                cdkDrag>
-                <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
+                cdkDropList
+                [id]="'taskList_' + taskListId"
+                [cdkDropListConnectedTo]="taskListsCdkIds"
+                [cdkDropListData]="tasks"
+                (cdkDropListDropped)="onTaskDrop($event)">
+                <div
+                    class="task-item"
+                    *ngFor="let task of tasks"
+                    cdkDrag>
+                    <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
+                </div>
             </div>
         </div>
     </section>
