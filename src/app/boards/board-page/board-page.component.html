@@ -25,7 +25,8 @@
                 [title]="taskList.name"
                 [boardId]="boardId"
                 [taskListId]="taskList.id"
-                [taskListsCdkIds]="taskListsCdkIds">
+                [taskListsCdkIds]="taskListsCdkIds"
+                (wasRemoved)="reloadTaskLists()">
             </app-task-list>
         </div>
     </section>

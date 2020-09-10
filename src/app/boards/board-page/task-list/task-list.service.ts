@@ -14,11 +14,7 @@ export class TaskListService {
     }
     
     getTaskLists(boardId: number): TaskList[] {
-        let taskLists = JSON.parse(window.localStorage.getItem(TASKS_KEY + boardId));
-
-        if (!!taskLists && taskLists.length) {
-            taskLists = taskLists.map(obj => new TaskList(obj))
-        }
+        let taskLists = this.loadTaskLists(boardId);
         return taskLists;
     }
     
@@ -26,7 +22,26 @@ export class TaskListService {
         const taskLists = this.getTaskLists(boardId) || [];
         taskLists.unshift(taskList);
 
+        this.setTaskLists(boardId, taskLists);
+    }
+
+    removeTaskList(boardId: number, taskListId: number) {
+        let taskLists = this.loadTaskLists(boardId);
+
+        this.setTaskLists(boardId, taskLists.filter(taskList => taskList.id !== taskListId));
+    }
+
+    private setTaskLists(boardId: number, taskLists: TaskList[]) {
         window.localStorage.setItem(TASKS_KEY + boardId, JSON.stringify(taskLists));
     }
 
+    private loadTaskLists(boardId: number): TaskList[] {
+        let taskLists = JSON.parse(window.localStorage.getItem(TASKS_KEY + boardId));
+
+        if (!!taskLists && taskLists.length) {
+            taskLists = taskLists.map(obj => new TaskList(obj));
+        }
+
+        return taskLists;
+    }
 }

@@ -1,6 +1,8 @@
 <div class="task-list border rounded-lg">
-    <section class="task-header border-bottom">
+    <section class="task-header border-bottom d-flex justify-content-between align-items-center mb-3 px-3">
+        <span></span>
         <h2 class="text-center">{{ title }}</h2>
+        <span class="fa fa-remove" role="button" (click)="removeTaskList()"></span>
     </section>
     <section class="task-body">
         <div class="tasks-list">

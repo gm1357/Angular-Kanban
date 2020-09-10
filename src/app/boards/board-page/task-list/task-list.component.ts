@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from './task/task';
 import { TaskService } from './task/task.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TaskListService } from './task-list.service';
 
 @Component({
   selector: 'app-task-list',
@@ -10,15 +11,19 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class TaskListComponent implements OnInit {
 
-  tasks: Task[] = [];
   @Input() title = 'New task list';
   @Input() taskListId: number;
   @Input() boardId: number;
-  @Input() taskListsCdkIds: string[] = []
+  @Input() taskListsCdkIds: string[] = [];
+  
+  @Output() wasRemoved = new EventEmitter<void>();
+  
+  tasks: Task[] = [];
   isFormOn = false;
 
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private taskListService: TaskListService
   ) { }
 
   ngOnInit() {
@@ -59,6 +64,11 @@ export class TaskListComponent implements OnInit {
 
   reloadTasks() {
     this.tasks = this.loadTasks();
+  }
+
+  removeTaskList() {
+    this.taskListService.removeTaskList(this.boardId, this.taskListId);
+    this.wasRemoved.emit();
   }
 
   private loadTasks() {

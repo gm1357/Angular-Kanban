@@ -57,4 +57,7 @@ export class BoardPageComponent implements OnInit {
     }
   }
 
+  reloadTaskLists() {
+    this.taskLists = this.taskListService.getTaskLists(this.boardId) || [];
+  }
 }
