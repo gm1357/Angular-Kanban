@@ -1,3 +1,6 @@
 <app-kcard [bgColor]="bgColor" [title]="title">
+    <div class="task-buttons d-flex justify-content-end mb-2">
+        <span *ngIf="canRemove" class="fa fa-remove" (click)="removerTask()" role="button"></span>
+    </div>
     <ng-content></ng-content>
 </app-kcard>

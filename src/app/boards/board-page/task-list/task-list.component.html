@@ -5,7 +5,7 @@
     <section class="task-body">
         <div class="tasks-list">
             <div class="task-item">
-                <app-task *ngIf="!isFormOn; else newTaskForm" class="new-task" (click)="showForm()" bgColor="primary">New task <i class="fa fa-plus"></i></app-task>
+                <app-task *ngIf="!isFormOn; else newTaskForm" class="new-task" (click)="showForm()" bgColor="primary">New task <span class="fa fa-plus"></span></app-task>
 
                 <ng-template #newTaskForm>
                     <div class="task-item">
@@ -24,7 +24,16 @@
                     class="task-item"
                     *ngFor="let task of tasks"
                     cdkDrag>
-                    <app-task [bgColor]="task.color" [title]="task.title">{{ task.details }}</app-task>
+                    <app-task
+                        [bgColor]="task.color"
+                        [title]="task.title"
+                        [canRemove]="true"
+                        [boardId]="boardId"
+                        [taskListId]="taskListId"
+                        [taskId]="task.id"
+                        (wasDeleted)="reloadTasks()">
+                        {{ task.details }}
+                    </app-task>
                 </div>
             </div>
         </div>

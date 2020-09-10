@@ -22,9 +22,8 @@ export class TaskListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tasks = this.taskService.getTasks(this.boardId, this.taskListId) || [];
+    this.tasks = this.loadTasks();
     this.taskListsCdkIds = this.taskListsCdkIds.filter(id => id != `taskList_${this.taskListId}`);
-    console.log(this.taskListsCdkIds);
   }
 
   updateTasks(task: Task) {
@@ -56,5 +55,13 @@ export class TaskListComponent implements OnInit {
       this.taskService.updateTaskList(this.boardId, this.taskListId, event.container.data);
       this.taskService.updateTaskList(this.boardId, transferTaskListId, event.previousContainer.data);
     }
+  }
+
+  reloadTasks() {
+    this.tasks = this.loadTasks();
+  }
+
+  private loadTasks() {
+    return this.taskService.getTasks(this.boardId, this.taskListId) || [];
   }
 }

@@ -40,4 +40,13 @@ export class TaskService {
     );
   }
 
+  removeTask(boardId: number, taskListId: number, taskId: number) {
+    const tasks = this.getTasks(boardId, taskListId) || [];
+    
+    window.localStorage.setItem(
+      `${TASKS_KEY}${boardId}_${taskListId}`, 
+        JSON.stringify(tasks.filter(task => task.id !== taskId))
+    )
+  }
+
 }
