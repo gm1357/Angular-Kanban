@@ -11,23 +11,35 @@
         <div class="board-info-item"></div>
     </section>
 
-    <section class="task-list-grid">
-        <div class="task-list-item">
-            <i *ngIf="!isFormOn; else taskListForm" class="fa fa-plus" (click)="showForm()"></i>
-    
-            <ng-template #taskListForm>
-                <app-task-list-form [boardId]="boardId" (change)="updateTaskLists($event)" (cancel)="closeForm($event)"></app-task-list-form>
-            </ng-template>
-        </div>
+    <section>
+        <div
+            cdkDropList
+            [cdkDropListData]="taskLists"
+            (cdkDropListDropped)="onTaskListDrop($event)"
+            class="task-list-grid"
+            cdkDropListOrientation="horizontal">
+            <div class="task-list-item">
+                <i *ngIf="!isFormOn; else taskListForm" class="fa fa-plus" (click)="showForm()"></i>
+        
+                <ng-template #taskListForm>
+                    <app-task-list-form [boardId]="boardId" (change)="updateTaskLists($event)" (cancel)="closeForm($event)"></app-task-list-form>
+                </ng-template>
+            </div>
 
-        <div class="task-list-item" *ngFor="let taskList of taskLists">
-            <app-task-list 
-                [title]="taskList.name"
-                [boardId]="boardId"
-                [taskListId]="taskList.id"
-                [taskListsCdkIds]="taskListsCdkIds"
-                (wasRemoved)="reloadTaskLists()">
-            </app-task-list>
+        
+            <div
+                class="task-list-item" 
+                *ngFor="let taskList of taskLists" 
+                cdkDrag 
+                cdkDragLockAxis="x">
+                <app-task-list 
+                    [title]="taskList.name"
+                    [boardId]="boardId"
+                    [taskListId]="taskList.id"
+                    [taskListsCdkIds]="taskListsCdkIds"
+                    (wasRemoved)="reloadTaskLists()">
+                </app-task-list>
+            </div>
         </div>
     </section>
 <div>

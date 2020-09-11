@@ -31,7 +31,7 @@ export class TaskListService {
         this.setTaskLists(boardId, taskLists.filter(taskList => taskList.id !== taskListId));
     }
 
-    private setTaskLists(boardId: number, taskLists: TaskList[]) {
+    setTaskLists(boardId: number, taskLists: TaskList[]) {
         window.localStorage.setItem(TASKS_KEY + boardId, JSON.stringify(taskLists));
     }
 

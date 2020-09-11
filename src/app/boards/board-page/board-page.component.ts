@@ -5,6 +5,7 @@ import { boardService } from '../board/board.service';
 import { TaskListService } from './task-list/task-list.service';
 import { Task } from './task-list/task/task';
 import { TaskList } from './task-list/task-list';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   templateUrl: './board-page.component.html',
@@ -59,5 +60,10 @@ export class BoardPageComponent implements OnInit {
 
   reloadTaskLists() {
     this.taskLists = this.taskListService.getTaskLists(this.boardId) || [];
+  }
+
+  onTaskListDrop(event: CdkDragDrop<TaskList[]>) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    this.taskListService.setTaskLists(this.boardId, event.container.data);
   }
 }
