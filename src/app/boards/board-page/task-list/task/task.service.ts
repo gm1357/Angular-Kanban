@@ -9,7 +9,7 @@ export class TaskService {
   getCurrentId(boardId: number, taskListId: number) {
     const tasks = this.getTasks(boardId, taskListId);
 
-    return !!tasks ? tasks[0].id : 0;
+    return !!tasks && tasks.length ? tasks[0].id : 0;
   }
 
   getTasks(boardId: number, taskListId: number): Task[] {
