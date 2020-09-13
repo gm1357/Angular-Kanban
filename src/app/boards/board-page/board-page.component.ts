@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Board } from '../board/board';
 import { boardService } from '../board/board.service';
 import { TaskListService } from './task-list/task-list.service';
-import { Task } from './task-list/task/task';
 import { TaskList } from './task-list/task-list';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './board-page.component.html',
@@ -37,8 +37,26 @@ export class BoardPageComponent implements OnInit {
   }
 
   remove() {
-    this.boardService.removeBoard(this.board.id);
-    this.router.navigate(['']);
+    Swal.fire({
+      title: `Delete board '${this.board.name}'?`,
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.boardService.removeBoard(this.board.id);
+        this.router.navigate(['']);
+        Swal.fire(
+          'Board deleted',
+          '',
+          'success'
+        );
+      }
+    });
   }
 
   showForm() {

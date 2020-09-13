@@ -3,6 +3,7 @@ import { Task } from './task/task';
 import { TaskService } from './task/task.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskListService } from './task-list.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-task-list',
@@ -67,8 +68,26 @@ export class TaskListComponent implements OnInit {
   }
 
   removeTaskList() {
-    this.taskListService.removeTaskList(this.boardId, this.taskListId);
-    this.wasRemoved.emit();
+    Swal.fire({
+      title: `Delete taskList '${this.title}'?`,
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.taskListService.removeTaskList(this.boardId, this.taskListId);
+        this.wasRemoved.emit();
+        Swal.fire(
+          'TaskList deleted',
+          '',
+          'success'
+        );
+      }
+    });
   }
 
   private loadTasks() {

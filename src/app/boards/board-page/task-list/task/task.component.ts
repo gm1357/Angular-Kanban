@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import Swal from 'sweetalert2';
 import { TaskService } from './task.service';
 
 @Component({
@@ -21,7 +22,25 @@ export class TaskComponent {
   ) {}
 
   removerTask() {
-    this.taskService.removeTask(this.boardId, this.taskListId, this.taskId);
-    this.wasDeleted.emit();
+    Swal.fire({
+      title: `Delete task '${this.title}'?`,
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.taskService.removeTask(this.boardId, this.taskListId, this.taskId);
+        this.wasDeleted.emit();
+        Swal.fire(
+          'Task deleted',
+          '',
+          'success'
+        );
+      }
+    });
   }
 }
