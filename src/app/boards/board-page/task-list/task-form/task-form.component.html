@@ -1,4 +1,4 @@
-<app-task [bgColor]="selectColor">
+<app-kcard [bgColor]="selectColor">
     <form [formGroup]="newTaskForm" (submit)="saveForm()">
         <input formControlName="title" type="text" id="title" class="form-control my-2" placeholder="Title">
         <textarea class="form-control my-2" rows="3" formControlName="details" placeholder="details"></textarea>
@@ -13,8 +13,8 @@
         </select>
 
         <div class="btn-group">
-            <button class="btn btn-success" type="submit">Create</button>
+            <button class="btn btn-success" type="submit">{{ taskId !== null ? 'Save' : 'Create' }}</button>
             <button class="btn btn-danger" (click)="cancelForm();">Cancel</button>
         </div>
     </form>
-</app-task>
+</app-kcard>

@@ -29,14 +29,13 @@
                     <app-task
                         [bgColor]="task.color"
                         [title]="task.title"
+                        [details]="task.details"
                         [canRemove]="true"
+                        [canEdit]="true"
                         [boardId]="boardId"
                         [taskListId]="taskListId"
                         [taskId]="task.id"
                         (wasDeleted)="reloadTasks()">
-                        <markdown lineNumbers emoji ngPreserveWhitespaces>
-                            {{ task.details }}
-                        </markdown>
                     </app-task>
                 </div>
             </div>

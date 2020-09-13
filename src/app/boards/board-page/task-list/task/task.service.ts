@@ -24,13 +24,27 @@ export class TaskService {
   }
 
   pushTask(boardId: number, taskListId: number, task: Task) {
-      const tasks = this.getTasks(boardId, taskListId) || [];
-      tasks.unshift(task);
+    const tasks = this.getTasks(boardId, taskListId) || [];
+    tasks.unshift(task);
 
+    window.localStorage.setItem(
+      `${TASKS_KEY}${boardId}_${taskListId}`, 
+      JSON.stringify(tasks)
+    );
+  }
+
+  editTask(boardId: number, taskListId: number, task: Task) {
+    const tasks = this.getTasks(boardId, taskListId) || [];
+    const index = tasks.findIndex(taskStored => taskStored.id === task.id);
+
+    if (index >= 0) {
+      tasks[index] = task;
+  
       window.localStorage.setItem(
         `${TASKS_KEY}${boardId}_${taskListId}`, 
         JSON.stringify(tasks)
       );
+    }
   }
 
   updateTaskList(boardId: number, taskListId: number, tasks: Task[]) {

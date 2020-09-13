@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Task } from './task';
 import { TaskService } from './task.service';
 
 @Component({
@@ -10,12 +11,16 @@ export class TaskComponent {
 
   @Input() bgColor = 'primary';
   @Input() title = '';
+  @Input() details = '';
   @Input() canRemove = false;
+  @Input() canEdit = false;
   @Input() boardId: number;
   @Input() taskListId: number;
   @Input() taskId: number;
 
   @Output() wasDeleted = new EventEmitter<void>();
+
+  isEditar = false;
 
   constructor(
     private taskService: TaskService
@@ -42,5 +47,24 @@ export class TaskComponent {
         );
       }
     });
+  }
+
+  editarTask() {
+    this.isEditar = true;
+  }
+
+  closeForm(close: boolean) {
+    if (close === true)
+    this.isEditar = false;
+  }
+
+  editedTask(task: Task) {
+    if (task instanceof Task) {
+      this.bgColor = task.color;
+      this.title = task.title;
+      this.details = task.details;
+      
+      this.isEditar = false;
+    }
   }
 }

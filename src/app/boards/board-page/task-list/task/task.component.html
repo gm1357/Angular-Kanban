@@ -1,6 +1,25 @@
-<app-kcard [bgColor]="bgColor" [title]="title">
-    <div class="task-buttons d-flex justify-content-end mb-2">
+<app-kcard [bgColor]="bgColor" [title]="title" *ngIf="!isEditar; else editarForm">
+    <div class="task-buttons d-flex justify-content-between mb-2">
+        <span *ngIf="canEdit" class="fa fa-edit" (click)="editarTask()" role="button"></span>
         <span *ngIf="canRemove" class="fa fa-remove" (click)="removerTask()" role="button"></span>
     </div>
-    <ng-content></ng-content>
+    <markdown lineNumbers emoji ngPreserveWhitespaces *ngIf="details !== ''; else showNgContent">
+        {{ details }}
+    </markdown>
+    <ng-template #showNgContent>
+        <ng-content></ng-content>
+    </ng-template>
 </app-kcard>
+
+<ng-template #editarForm>
+    <app-task-form
+        [taskListId]="taskListId"
+        [boardId]="boardId"
+        [title]="title"
+        [bgColor]="bgColor"
+        [details]="details"
+        [taskId]="taskId"
+        (cancel)="closeForm($event)"
+        (change)="editedTask($event)">
+    </app-task-form>
+</ng-template>
