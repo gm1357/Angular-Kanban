@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { TaskList } from './task-list';
 
 const TASKS_KEY = 'taskList';
-const CURRENT_ID_KEY = 'currentTaskListId';
 
 @Injectable({ providedIn: 'root' })
 export class TaskListService {
 
     getCurrentId(boardId: number) {
         const taskLists = this.getTaskLists(boardId);
-
+        taskLists.sort((a, b) => b.id - a.id);
         return !!taskLists && taskLists.length ? taskLists[0].id : 0;
     }
     
