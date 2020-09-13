@@ -8,8 +8,7 @@ export class TaskListService {
 
     getCurrentId(boardId: number) {
         const taskLists = this.getTaskLists(boardId);
-        taskLists.sort((a, b) => b.id - a.id);
-        return !!taskLists && taskLists.length ? taskLists[0].id : 0;
+        return !!taskLists && taskLists.length ? taskLists.sort((a, b) => b.id - a.id)[0].id : 0;
     }
     
     getTaskLists(boardId: number): TaskList[] {
