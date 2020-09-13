@@ -30,7 +30,9 @@ export class boardService {
     }
 
     private setCurrentId(id: number) {
-        window.localStorage.setItem(CURRENT_ID_KEY, id.toString());
+        if (id == 0 || id > this.getCurrentId()) {
+            window.localStorage.setItem(CURRENT_ID_KEY, id.toString());
+        }
     }
 
     hasBoards() {
