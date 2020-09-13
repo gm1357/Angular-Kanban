@@ -24,6 +24,7 @@
     "@babel/compat-data": "7.8.0",
     "bootstrap": "^4.5.2",
     "font-awesome": "^4.7.0",
+    "ngx-markdown": "^10.1.1",
     "rxjs": "~6.6.2",
     "sweetalert2": "^10.0.2",
     "tslib": "^2.0.0",

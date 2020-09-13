@@ -8,6 +8,7 @@ import { TaskFormComponent } from './task-list/task-form/task-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TaskListFormComponent } from './task-list-form/task-list-form.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         KcardModule,
         ReactiveFormsModule,
         FormsModule,
-        DragDropModule
+        DragDropModule,
+        MarkdownModule.forRoot(),
     ]
 })
 export class BoardPageModule { }

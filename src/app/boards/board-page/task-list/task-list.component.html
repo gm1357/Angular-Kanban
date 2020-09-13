@@ -34,7 +34,9 @@
                         [taskListId]="taskListId"
                         [taskId]="task.id"
                         (wasDeleted)="reloadTasks()">
-                        {{ task.details }}
+                        <markdown lineNumbers emoji ngPreserveWhitespaces>
+                            {{ task.details }}
+                        </markdown>
                     </app-task>
                 </div>
             </div>
