@@ -18,6 +18,7 @@ export class BoardPageComponent implements OnInit {
   taskLists: TaskList[] = [];
   taskListsCdkIds: string[] = [];
   isFormOn: boolean = false;
+  isEdit: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -83,5 +84,15 @@ export class BoardPageComponent implements OnInit {
   onTaskListDrop(event: CdkDragDrop<TaskList[]>) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     this.taskListService.setTaskLists(this.boardId, event.container.data);
+  }
+
+  toggleEdit() {
+    this.isEdit = !this.isEdit;
+  }
+
+  editBoard(newTitle: string) {
+    this.boardService.editBoard(this.boardId, newTitle);
+    this.isEdit = false;
+    this.board.name = newTitle;
   }
 }

@@ -1,12 +1,3 @@
-.board-info {
-    display: flex;
-    margin-bottom: 50px;
-}
-
-.board-info-item {
-    flex: 1;
-}
-
 .task-list-grid {
     display: flex;
     flex-direction: row;

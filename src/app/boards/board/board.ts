@@ -16,6 +16,10 @@ export class Board {
         return this._name;
     }
 
+    set name(name: string) {
+        this._name = name;
+    }
+
     get color() {
         return this._color;
     }

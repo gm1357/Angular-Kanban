@@ -76,4 +76,11 @@ export class boardService {
         
         this.setBoardList(this.boardsList);
     }
+
+    editBoard(id: number, newTitle: string) {
+        const boards = this.getBoardList();
+        const index = boards.findIndex(board => board._id == id);
+        boards[index].name = newTitle;
+        this.setBoardList(boards);
+    }
 }
