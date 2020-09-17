@@ -17,10 +17,11 @@ export class TaskListComponent implements OnInit {
   @Input() boardId: number;
   @Input() taskListsCdkIds: string[] = [];
   
-  @Output() wasRemoved = new EventEmitter<void>();
+  @Output() shouldUpdate = new EventEmitter<void>();
   
   tasks: Task[] = [];
   isFormOn = false;
+  isEdit = false;
 
   constructor(
     private taskService: TaskService,
@@ -80,7 +81,7 @@ export class TaskListComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.taskListService.removeTaskList(this.boardId, this.taskListId);
-        this.wasRemoved.emit();
+        this.shouldUpdate.emit();
         Swal.fire(
           'TaskList deleted',
           '',
@@ -88,6 +89,17 @@ export class TaskListComponent implements OnInit {
         );
       }
     });
+  }
+
+  toggleEditTaskList() {
+    this.isEdit = !this.isEdit;
+  }
+
+  changeTaskListTitle(newTitle: string) {
+    this.title = newTitle;
+    this.taskListService.updateTaskListTitle(this.boardId, this.taskListId, newTitle);
+    this.shouldUpdate.emit();
+    this.isEdit = false;
   }
 
   private loadTasks() {

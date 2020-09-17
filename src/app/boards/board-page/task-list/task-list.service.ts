@@ -33,6 +33,13 @@ export class TaskListService {
         window.localStorage.setItem(TASKS_KEY + boardId, JSON.stringify(taskLists));
     }
 
+    updateTaskListTitle(boardId: number, taskListId: number, newTitle: string) {
+        let taskLists = this.loadTaskLists(boardId);
+        const index = taskLists.findIndex(taskList => taskList.id === taskListId);
+        taskLists[index] = new TaskList({_id: taskListId, _name: newTitle});
+        this.setTaskLists(boardId, taskLists);
+    }
+
     private loadTaskLists(boardId: number): TaskList[] {
         let taskLists = JSON.parse(window.localStorage.getItem(TASKS_KEY + boardId));
 
