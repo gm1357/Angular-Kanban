@@ -29,7 +29,7 @@
     </section>
     <section class="task-body">
         <div class="tasks-list">
-            <div class="task-item">
+            <div class="task-item" [class.pb-3]="!isFormOn">
                 <app-task *ngIf="!isFormOn; else newTaskForm" class="new-task" (click)="showForm()" bgColor="primary">New task <span class="fa fa-plus"></span></app-task>
 
                 <ng-template #newTaskForm>

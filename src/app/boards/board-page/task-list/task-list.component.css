@@ -17,6 +17,8 @@
 
 .task-body {
     padding-bottom: 20px;
+    position: relative;
+    height: calc(100% - 4em);
 }
 
 .tasks-list {
@@ -26,7 +28,11 @@
     margin: 0 10px;
     padding: 0 10px;
     overflow-y: auto;
-    max-height: 440px;
+    height: 440px;
+}
+
+.task-list-drag {
+    height: 100%;
 }
 
 .task-item {

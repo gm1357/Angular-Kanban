@@ -34,7 +34,7 @@ export class BoardPageComponent implements OnInit {
     });
 
     this.taskLists = this.taskListService.getTaskLists(this.boardId) || [];
-    this.taskListsCdkIds = this.taskLists.map(taskList => `taskList_${taskList.id}`) || [];
+    this.updateCdkIds();
   }
 
   remove() {
@@ -73,6 +73,7 @@ export class BoardPageComponent implements OnInit {
   updateTaskLists(taskList: TaskList) {
     if (taskList.id) {
       this.taskLists.unshift(taskList);
+      this.updateCdkIds();
       this.isFormOn = false;
     }
   }
@@ -94,5 +95,9 @@ export class BoardPageComponent implements OnInit {
     this.boardService.editBoard(this.boardId, newTitle);
     this.isEdit = false;
     this.board.name = newTitle;
+  }
+
+  private updateCdkIds() {
+    this.taskListsCdkIds = this.taskLists.map(taskList => `taskList_${taskList.id}`) || [];
   }
 }
