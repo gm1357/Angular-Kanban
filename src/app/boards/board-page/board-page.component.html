@@ -42,7 +42,7 @@
             class="task-list-grid"
             cdkDropListOrientation="horizontal">
             <div class="task-list-item">
-                <i *ngIf="!isFormOn; else taskListForm" class="fa fa-plus" (click)="showForm()"></i>
+                <i *ngIf="!isFormOn; else taskListForm" class="fa fa-plus" role="button" (click)="showForm()"></i>
         
                 <ng-template #taskListForm>
                     <app-task-list-form [boardId]="boardId" (change)="updateTaskLists($event)" (cancel)="closeForm($event)"></app-task-list-form>
@@ -61,6 +61,7 @@
                     [taskListId]="taskList.id"
                     [taskListsCdkIds]="taskListsCdkIds"
                     (shouldUpdate)="reloadTaskLists()">
+                    <div class="custom-handle" cdkDragHandle></div>
                 </app-task-list>
             </div>
         </div>

@@ -1,7 +1,10 @@
 <div class="task-list border rounded-lg">
     <section class="task-header border-bottom mb-3 px-3">
         <div class="d-flex justify-content-between align-items-center" *ngIf="!isEdit; else editList">
-            <span></span>
+            <div class="drag-container">
+                <ng-content></ng-content>
+                <span class="fa fa-arrows-h"></span>
+            </div>
             <h2 class="text-center" (dblclick)="toggleEditTaskList()">{{ title }}</h2>
             <div class="buttons d-flex flex-column">
                 <span class="fa fa-edit mb-1" role="button" (click)="toggleEditTaskList()"></span>
@@ -38,6 +41,7 @@
 
             <div
                 cdkDropList
+                class="task-list-drag"
                 [id]="'taskList_' + taskListId"
                 [cdkDropListConnectedTo]="taskListsCdkIds"
                 [cdkDropListData]="tasks"
