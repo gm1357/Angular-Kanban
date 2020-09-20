@@ -18,7 +18,7 @@ export class TaskComponent {
   @Input() taskListId: number;
   @Input() taskId: number;
 
-  @Output() wasDeleted = new EventEmitter<void>();
+  @Output() shouldUpdate = new EventEmitter<void>();
 
   isEditar = false;
 
@@ -39,7 +39,7 @@ export class TaskComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.taskService.removeTask(this.boardId, this.taskListId, this.taskId);
-        this.wasDeleted.emit();
+        this.shouldUpdate.emit();
         Swal.fire(
           'Task deleted',
           '',
@@ -63,7 +63,7 @@ export class TaskComponent {
       this.bgColor = task.color;
       this.title = task.title;
       this.details = task.details;
-      
+      this.shouldUpdate.emit();
       this.isEditar = false;
     }
   }

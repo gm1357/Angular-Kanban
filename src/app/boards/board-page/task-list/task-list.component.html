@@ -59,7 +59,7 @@
                         [boardId]="boardId"
                         [taskListId]="taskListId"
                         [taskId]="task.id"
-                        (wasDeleted)="reloadTasks()">
+                        (shouldUpdate)="reloadTasks()">
                     </app-task>
                 </div>
             </div>
